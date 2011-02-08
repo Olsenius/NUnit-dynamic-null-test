@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 
 namespace NUnit_dynamic_null_test
@@ -40,7 +41,15 @@ namespace NUnit_dynamic_null_test
         [Test]
         public void Some_thing_Assert_null()
         {
-            Assert.Null(_someClass.SomeThing);
+            Assert.Null(_someClass.SomeThing); //Ok
+        }
+
+        [Test]
+        public void Some_thing_casted_to_reference_type_Is_null()
+        {
+            Assert.That((object)_someClass.SomeThing, Is.Null);  //Ok
+            Assert.That((string)_someClass.SomeThing, Is.Null);  //Ok
+            Assert.That((Exception)_someClass.SomeThing, Is.Null);  //Ok
         }
 
         private static dynamic CreateSomeClass()
